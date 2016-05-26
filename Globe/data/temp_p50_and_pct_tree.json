@@ -1,0 +1,223 @@
+{
+  "success": true,
+  "payload": {
+    "histograms": {
+      "population": {
+        "type": "MultiDimensionalThresholdBinner",
+        "totalCount": 27730,
+        "dims": [
+          {
+            "column": {
+              "dbName": "temp_p50",
+              "fullName": "Temperature",
+              "description": "Annual mean temperature (50 year average)",
+              "units": "° Centigrade",
+              "source": "calculated in ArcGIS from: Climate Wizard",
+              "nativeRes": "30m",
+              "geocode": "3",
+              "colorProfileSource": "0x313695,0x4575B4,0x74ADD1,0xABD9E9,0xE0F3F8,0xFFFFBF,0xFEE090,0xFDAE61,0xF46D43,0xD73027,0xA50026",
+              "type": "CLIMATE",
+              "extrapolated": true,
+              "dyn": "S",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": -28.0,
+              "max": 31.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "",
+              "binLabels": ""
+            },
+            "range": {
+              "left": -28.0,
+              "right": 31.0
+            },
+            "bins": [
+              {
+                "left": -28.0,
+                "right": 24.464000701904297
+              },
+              {
+                "left": 24.464000701904297,
+                "right": 26.05699920654297
+              },
+              {
+                "left": 26.05699920654297,
+                "right": 31.0
+              }
+            ]
+          },
+          {
+            "column": {
+              "dbName": "pct_tree",
+              "fullName": "% Tree cover (2001)",
+              "description": "percent tree cover (year 2001; VCF 2001 V002)",
+              "units": "%",
+              "source": "Hansen et al. (2003); global_dgg_dataset_v0_vcf_calcs.dbf",
+              "nativeRes": "500m sinusoidal",
+              "geocode": "??? Zonal stats after nodata conversion",
+              "colorProfileSource": "0xE0E0E0,0xFFFFE5,0xF7FCB9,0xD9F0A3,0xADDD8E,0x78C679,0x41AB5D,0x238443,0x006837,0x004529,0x014636",
+              "type": "REMOTE_SENSING",
+              "extrapolated": false,
+              "dyn": "D",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": 0.0,
+              "max": 100.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "0:0,0:1,1:5,5:10,10:20,20:30,30:40,40:50,50:60,60:75,75:100",
+              "binLabels": ""
+            },
+            "range": {
+              "left": 0.0,
+              "right": 100.0
+            },
+            "bins": [
+              {
+                "left": 0.0,
+                "right": 32.884498596191406
+              },
+              {
+                "left": 32.884498596191406,
+                "right": 69.35220336914062
+              },
+              {
+                "left": 69.35220336914062,
+                "right": 100.0
+              }
+            ]
+          }
+        ],
+        "countMx": [
+          [
+            3600,
+            3792,
+            1852
+          ],
+          [
+            2493,
+            2677,
+            4073
+          ],
+          [
+            3151,
+            2774,
+            3318
+          ]
+        ]
+      },
+      "collection": {
+        "type": "MultiDimensionalThresholdBinner",
+        "totalCount": 157,
+        "dims": [
+          {
+            "column": {
+              "dbName": "temp_p50",
+              "fullName": "Temperature",
+              "description": "Annual mean temperature (50 year average)",
+              "units": "° Centigrade",
+              "source": "calculated in ArcGIS from: Climate Wizard",
+              "nativeRes": "30m",
+              "geocode": "3",
+              "colorProfileSource": "0x313695,0x4575B4,0x74ADD1,0xABD9E9,0xE0F3F8,0xFFFFBF,0xFEE090,0xFDAE61,0xF46D43,0xD73027,0xA50026",
+              "type": "CLIMATE",
+              "extrapolated": true,
+              "dyn": "S",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": -28.0,
+              "max": 31.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "",
+              "binLabels": ""
+            },
+            "range": {
+              "left": -28.0,
+              "right": 31.0
+            },
+            "bins": [
+              {
+                "left": -28.0,
+                "right": 24.464000701904297
+              },
+              {
+                "left": 24.464000701904297,
+                "right": 26.05699920654297
+              },
+              {
+                "left": 26.05699920654297,
+                "right": 31.0
+              }
+            ]
+          },
+          {
+            "column": {
+              "dbName": "pct_tree",
+              "fullName": "% Tree cover (2001)",
+              "description": "percent tree cover (year 2001; VCF 2001 V002)",
+              "units": "%",
+              "source": "Hansen et al. (2003); global_dgg_dataset_v0_vcf_calcs.dbf",
+              "nativeRes": "500m sinusoidal",
+              "geocode": "??? Zonal stats after nodata conversion",
+              "colorProfileSource": "0xE0E0E0,0xFFFFE5,0xF7FCB9,0xD9F0A3,0xADDD8E,0x78C679,0x41AB5D,0x238443,0x006837,0x004529,0x014636",
+              "type": "REMOTE_SENSING",
+              "extrapolated": false,
+              "dyn": "D",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": 0.0,
+              "max": 100.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "0:0,0:1,1:5,5:10,10:20,20:30,30:40,40:50,50:60,60:75,75:100",
+              "binLabels": ""
+            },
+            "range": {
+              "left": 0.0,
+              "right": 100.0
+            },
+            "bins": [
+              {
+                "left": 0.0,
+                "right": 32.884498596191406
+              },
+              {
+                "left": 32.884498596191406,
+                "right": 69.35220336914062
+              },
+              {
+                "left": 69.35220336914062,
+                "right": 100.0
+              }
+            ]
+          }
+        ],
+        "countMx": [
+          [
+            20,
+            49,
+            15
+          ],
+          [
+            6,
+            12,
+            18
+          ],
+          [
+            11,
+            23,
+            3
+          ]
+        ]
+      }
+    },
+    "explanation": "\u003cp\u003e\u003cb\u003eYou guys have to write this explanation.\u003c/b\u003e\u003c/p\u003e",
+    "statistics": {
+      "pLoss": -1.0,
+      "Hellinger": 0.229229796128959,
+      "Jensen-Shannon": 0.07345899364754335
+    }
+  }
+}

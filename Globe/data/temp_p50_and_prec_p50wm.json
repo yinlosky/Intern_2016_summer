@@ -1,0 +1,223 @@
+{
+  "success": true,
+  "payload": {
+    "histograms": {
+      "population": {
+        "type": "MultiDimensionalThresholdBinner",
+        "totalCount": 27846,
+        "dims": [
+          {
+            "column": {
+              "dbName": "temp_p50",
+              "fullName": "Temperature",
+              "description": "Annual mean temperature (50 year average)",
+              "units": "° Centigrade",
+              "source": "calculated in ArcGIS from: Climate Wizard",
+              "nativeRes": "30m",
+              "geocode": "3",
+              "colorProfileSource": "0x313695,0x4575B4,0x74ADD1,0xABD9E9,0xE0F3F8,0xFFFFBF,0xFEE090,0xFDAE61,0xF46D43,0xD73027,0xA50026",
+              "type": "CLIMATE",
+              "extrapolated": true,
+              "dyn": "S",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": -28.0,
+              "max": 31.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "",
+              "binLabels": ""
+            },
+            "range": {
+              "left": -28.0,
+              "right": 31.0
+            },
+            "bins": [
+              {
+                "left": -28.0,
+                "right": 24.45669937133789
+              },
+              {
+                "left": 24.45669937133789,
+                "right": 26.05389976501465
+              },
+              {
+                "left": 26.05389976501465,
+                "right": 31.0
+              }
+            ]
+          },
+          {
+            "column": {
+              "dbName": "prec_p50wm",
+              "fullName": "Precipitation",
+              "description": "Annual mean precipitation (mm; 1950 through 1999)",
+              "units": "mm",
+              "source": "Willmott \u0026 Matsuura (2001) ",
+              "nativeRes": "15m",
+              "geocode": "3",
+              "colorProfileSource": "0x543005,0x8C510A,0xBF812D,0xDFC27D,0xF6E8C3,0xF5F5F5,0xC7EAE5,0x80CDC1,0x35978F,0x01665E,0x003C30",
+              "type": "CLIMATE",
+              "extrapolated": true,
+              "dyn": "S",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": 1.0,
+              "max": 10572.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "0:50,50:100,100:250,250:500,500:750,750:1000,1000:1250,1250:1500,1500:2000,2000:3000,3000:11000",
+              "binLabels": ""
+            },
+            "range": {
+              "left": 1.0,
+              "right": 10572.0
+            },
+            "bins": [
+              {
+                "left": 1.0,
+                "right": 1493.1619873046875
+              },
+              {
+                "left": 1493.1619873046875,
+                "right": 2202.873046875
+              },
+              {
+                "left": 2202.873046875,
+                "right": 10572.0
+              }
+            ]
+          }
+        ],
+        "countMx": [
+          [
+            4702,
+            2981,
+            1599
+          ],
+          [
+            2387,
+            3764,
+            3131
+          ],
+          [
+            2193,
+            2537,
+            4552
+          ]
+        ]
+      },
+      "collection": {
+        "type": "MultiDimensionalThresholdBinner",
+        "totalCount": 157,
+        "dims": [
+          {
+            "column": {
+              "dbName": "temp_p50",
+              "fullName": "Temperature",
+              "description": "Annual mean temperature (50 year average)",
+              "units": "° Centigrade",
+              "source": "calculated in ArcGIS from: Climate Wizard",
+              "nativeRes": "30m",
+              "geocode": "3",
+              "colorProfileSource": "0x313695,0x4575B4,0x74ADD1,0xABD9E9,0xE0F3F8,0xFFFFBF,0xFEE090,0xFDAE61,0xF46D43,0xD73027,0xA50026",
+              "type": "CLIMATE",
+              "extrapolated": true,
+              "dyn": "S",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": -28.0,
+              "max": 31.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "",
+              "binLabels": ""
+            },
+            "range": {
+              "left": -28.0,
+              "right": 31.0
+            },
+            "bins": [
+              {
+                "left": -28.0,
+                "right": 24.45669937133789
+              },
+              {
+                "left": 24.45669937133789,
+                "right": 26.05389976501465
+              },
+              {
+                "left": 26.05389976501465,
+                "right": 31.0
+              }
+            ]
+          },
+          {
+            "column": {
+              "dbName": "prec_p50wm",
+              "fullName": "Precipitation",
+              "description": "Annual mean precipitation (mm; 1950 through 1999)",
+              "units": "mm",
+              "source": "Willmott \u0026 Matsuura (2001) ",
+              "nativeRes": "15m",
+              "geocode": "3",
+              "colorProfileSource": "0x543005,0x8C510A,0xBF812D,0xDFC27D,0xF6E8C3,0xF5F5F5,0xC7EAE5,0x80CDC1,0x35978F,0x01665E,0x003C30",
+              "type": "CLIMATE",
+              "extrapolated": true,
+              "dyn": "S",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": 1.0,
+              "max": 10572.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "0:50,50:100,100:250,250:500,500:750,750:1000,1000:1250,1250:1500,1500:2000,2000:3000,3000:11000",
+              "binLabels": ""
+            },
+            "range": {
+              "left": 1.0,
+              "right": 10572.0
+            },
+            "bins": [
+              {
+                "left": 1.0,
+                "right": 1493.1619873046875
+              },
+              {
+                "left": 1493.1619873046875,
+                "right": 2202.873046875
+              },
+              {
+                "left": 2202.873046875,
+                "right": 10572.0
+              }
+            ]
+          }
+        ],
+        "countMx": [
+          [
+            40,
+            31,
+            13
+          ],
+          [
+            16,
+            5,
+            15
+          ],
+          [
+            1,
+            15,
+            21
+          ]
+        ]
+      }
+    },
+    "explanation": "\u003cp\u003e\u003cb\u003eYou guys have to write this explanation.\u003c/b\u003e\u003c/p\u003e",
+    "statistics": {
+      "pLoss": -1.0,
+      "Hellinger": 0.22792967272044748,
+      "Jensen-Shannon": 0.0709762357342893
+    }
+  }
+}

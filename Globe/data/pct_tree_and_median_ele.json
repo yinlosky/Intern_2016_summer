@@ -1,0 +1,223 @@
+{
+  "success": true,
+  "payload": {
+    "histograms": {
+      "population": {
+        "type": "MultiDimensionalThresholdBinner",
+        "totalCount": 27732,
+        "dims": [
+          {
+            "column": {
+              "dbName": "pct_tree",
+              "fullName": "% Tree cover (2001)",
+              "description": "percent tree cover (year 2001; VCF 2001 V002)",
+              "units": "%",
+              "source": "Hansen et al. (2003); global_dgg_dataset_v0_vcf_calcs.dbf",
+              "nativeRes": "500m sinusoidal",
+              "geocode": "??? Zonal stats after nodata conversion",
+              "colorProfileSource": "0xE0E0E0,0xFFFFE5,0xF7FCB9,0xD9F0A3,0xADDD8E,0x78C679,0x41AB5D,0x238443,0x006837,0x004529,0x014636",
+              "type": "REMOTE_SENSING",
+              "extrapolated": false,
+              "dyn": "D",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": 0.0,
+              "max": 100.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "0:0,0:1,1:5,5:10,10:20,20:30,30:40,40:50,50:60,60:75,75:100",
+              "binLabels": ""
+            },
+            "range": {
+              "left": 0.0,
+              "right": 100.0
+            },
+            "bins": [
+              {
+                "left": 0.0,
+                "right": 32.890899658203125
+              },
+              {
+                "left": 32.890899658203125,
+                "right": 69.35220336914062
+              },
+              {
+                "left": 69.35220336914062,
+                "right": 100.0
+              }
+            ]
+          },
+          {
+            "column": {
+              "dbName": "median_ele",
+              "fullName": "Elevation",
+              "description": "median elevation (m) of cell",
+              "units": "m",
+              "source": "produced from SRTM 3s, 30s product: Fischer et al. (2007)                 Fischer, G., F. Nachtergaele, S. Prieler, H.T. van Velthuizen, L. Verelst, D. Wiberg, 2007. Global Agro-ecological Zones Assessment for Agriculture (GAEZ 2007). IIASA, Laxenburg, Austria and FAO, Rome, Italy.",
+              "nativeRes": "5m",
+              "geocode": "3",
+              "colorProfileSource": "0xAFF0E9,0xB1F2CF,0xB0F5B3,0xCEFAB1,0xF0FCB3,0xDEED93,0x97D160,0x49B536,0x15962F,0x12823F,0x528F38,0x869E2E,0xB8AB23,0xEDB50E,0xE89002,0xCC5D02,0xB03302,0x911201,0x780901,0x731705,0x701F07,0x6E280A,0x692E0D,0x784323,0x8A5E42,0x967765,0xA69992,0xB0B0B0,0xC4C4C4,0xD6D4D6,0xEBE8EB,0xFFFCFF",
+              "type": "SURFACE",
+              "extrapolated": true,
+              "dyn": "S",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": -415.0,
+              "max": 6422.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "-413:0,0:10,10:25,25:50,50:75,75:100,100:200,200:300,300:400,400:500,500:750,750:1000,1000:1250,1250:1500,1500:1750,1750:2000,2000:2250,2250:2500,2500:2750,2750:3000,3000:3250,3250:3500,3500:3750,3750:4000,4000:4250,4250:4500,4500:4750,4750:5000,5000:5250,5250:5500,5500:6000,6000:6568",
+              "binLabels": ""
+            },
+            "range": {
+              "left": -415.0,
+              "right": 6422.0
+            },
+            "bins": [
+              {
+                "left": -415.0,
+                "right": 147.55360412597656
+              },
+              {
+                "left": 147.55360412597656,
+                "right": 444.47320556640625
+              },
+              {
+                "left": 444.47320556640625,
+                "right": 6422.0
+              }
+            ]
+          }
+        ],
+        "countMx": [
+          [
+            3155,
+            2785,
+            3304
+          ],
+          [
+            3175,
+            2406,
+            3663
+          ],
+          [
+            2914,
+            4053,
+            2277
+          ]
+        ]
+      },
+      "collection": {
+        "type": "MultiDimensionalThresholdBinner",
+        "totalCount": 157,
+        "dims": [
+          {
+            "column": {
+              "dbName": "pct_tree",
+              "fullName": "% Tree cover (2001)",
+              "description": "percent tree cover (year 2001; VCF 2001 V002)",
+              "units": "%",
+              "source": "Hansen et al. (2003); global_dgg_dataset_v0_vcf_calcs.dbf",
+              "nativeRes": "500m sinusoidal",
+              "geocode": "??? Zonal stats after nodata conversion",
+              "colorProfileSource": "0xE0E0E0,0xFFFFE5,0xF7FCB9,0xD9F0A3,0xADDD8E,0x78C679,0x41AB5D,0x238443,0x006837,0x004529,0x014636",
+              "type": "REMOTE_SENSING",
+              "extrapolated": false,
+              "dyn": "D",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": 0.0,
+              "max": 100.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "0:0,0:1,1:5,5:10,10:20,20:30,30:40,40:50,50:60,60:75,75:100",
+              "binLabels": ""
+            },
+            "range": {
+              "left": 0.0,
+              "right": 100.0
+            },
+            "bins": [
+              {
+                "left": 0.0,
+                "right": 32.890899658203125
+              },
+              {
+                "left": 32.890899658203125,
+                "right": 69.35220336914062
+              },
+              {
+                "left": 69.35220336914062,
+                "right": 100.0
+              }
+            ]
+          },
+          {
+            "column": {
+              "dbName": "median_ele",
+              "fullName": "Elevation",
+              "description": "median elevation (m) of cell",
+              "units": "m",
+              "source": "produced from SRTM 3s, 30s product: Fischer et al. (2007)                 Fischer, G., F. Nachtergaele, S. Prieler, H.T. van Velthuizen, L. Verelst, D. Wiberg, 2007. Global Agro-ecological Zones Assessment for Agriculture (GAEZ 2007). IIASA, Laxenburg, Austria and FAO, Rome, Italy.",
+              "nativeRes": "5m",
+              "geocode": "3",
+              "colorProfileSource": "0xAFF0E9,0xB1F2CF,0xB0F5B3,0xCEFAB1,0xF0FCB3,0xDEED93,0x97D160,0x49B536,0x15962F,0x12823F,0x528F38,0x869E2E,0xB8AB23,0xEDB50E,0xE89002,0xCC5D02,0xB03302,0x911201,0x780901,0x731705,0x701F07,0x6E280A,0x692E0D,0x784323,0x8A5E42,0x967765,0xA69992,0xB0B0B0,0xC4C4C4,0xD6D4D6,0xEBE8EB,0xFFFCFF",
+              "type": "SURFACE",
+              "extrapolated": true,
+              "dyn": "S",
+              "pub": "Y",
+              "dataType": "CONTINUOUS",
+              "min": -415.0,
+              "max": 6422.0,
+              "step": 1.0,
+              "skewType": "NONE",
+              "binDefs": "-413:0,0:10,10:25,25:50,50:75,75:100,100:200,200:300,300:400,400:500,500:750,750:1000,1000:1250,1250:1500,1500:1750,1750:2000,2000:2250,2250:2500,2500:2750,2750:3000,3000:3250,3250:3500,3500:3750,3750:4000,4000:4250,4250:4500,4500:4750,4750:5000,5000:5250,5250:5500,5500:6000,6000:6568",
+              "binLabels": ""
+            },
+            "range": {
+              "left": -415.0,
+              "right": 6422.0
+            },
+            "bins": [
+              {
+                "left": -415.0,
+                "right": 147.55360412597656
+              },
+              {
+                "left": 147.55360412597656,
+                "right": 444.47320556640625
+              },
+              {
+                "left": 444.47320556640625,
+                "right": 6422.0
+              }
+            ]
+          }
+        ],
+        "countMx": [
+          [
+            17,
+            2,
+            18
+          ],
+          [
+            25,
+            10,
+            49
+          ],
+          [
+            11,
+            11,
+            14
+          ]
+        ]
+      }
+    },
+    "explanation": "\u003cp\u003e\u003cb\u003eYou guys have to write this explanation.\u003c/b\u003e\u003c/p\u003e",
+    "statistics": {
+      "pLoss": -1.0,
+      "Hellinger": 0.2267429976639668,
+      "Jensen-Shannon": 0.07146948111467408
+    }
+  }
+}

@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Representatviveness Matrix</title>
+		<script type="text/javascript" src="d3/d3.v3.min.js"></script>
+        <script src="contPlot.js"></script>
+        <script src="scatterPlot.js"></script>
+		<script src="process.js"></script>
+        <script src="histogram.js"></script>
+        <script src="clickprocess.js"></script>
+		<style type="text/css">
+			body {
+				font: 10px sans-serif;
+					}
+
+			.label {
+			font-weight: bold;
+					}
+			.axis path,
+			.axis line {
+				fill: none;
+				stroke: black;
+				shape-rendering: crispEdges;
+			}
+			
+			.axis text {
+				font-family: sans-serif;
+				font-size: 12px;
+			}
+			.tile {
+				shape-rendering: crispEdges;
+			}
+            #container {
+                width: 900px;
+                height: 900px;
+                position: relative;
+            }
+
+            #back,
+            #middle,
+            #front, 
+            #sfront
+            {
+                width: 1%;
+                height: 1%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            #middle {
+                z-index: 5;
+            }
+            #front {
+                z-index: 10;
+            }
+            #sfront{
+                z-index:15;
+            }
+            
+            #sfront_back,
+            #sfront_middle,
+            #sfront_front
+            {
+                width: 1%;
+                height: 1%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            #sfront_back{
+                z-index:12;
+            }
+            #sfront_middle{
+                z-index:13;
+            }
+            #sfront_front{
+                z-index:15;
+            }
+            
+		</style>
+	</head>
+	<body>
+        <div id="container">
+            <div id="back"></div>
+            <div id="middle"></div>
+            <div id="front"></div>
+            <div id="sfront">
+                <div id="sfront_back"></div>
+                <div id="sfront_middle"></div>
+                <div id="sfront_front"></div>
+            </div>
+        </div>
+		<script type="text/javascript">
+			   // this function removes duplicates in an array
+    function eliminateDuplicates(arr) {
+        var i,
+            len=arr.length,
+            out=[],
+            obj={};
+
+        for (i=0;i<len;i++) {
+            obj[arr[i]]=0;
+        }
+        for (i in obj) {
+            out.push(i);
+        }
+        return out;
+    }
+	  //this function transfer the bins to arrays of values
+    function transferBinsToArraysOfValues(bin){
+	    var i,
+		    len=bin.length,
+		    out=[];
+	    for(i=0;i<len;i++){
+		    out.push(bin[i].left);
+		    out.push(bin[i].right);
+	    }
+	return out;
+    }
+    // Find max value in a 2D Array
+    function findMax(twoDArray) {
+        var i = twoDArray.length;
+        var j = twoDArray[0].length;
+        var k;
+        var temp = [];
+        for (k = 0; k < i; k++) {
+            temp.push(Math.max.apply(Math, twoDArray[k]));
+        }
+        return Math.max.apply(Math, temp);
+    }
+    // this function adds grayScale to the viz
+
+    function addgrayScale() {
+        var grayScale = d3.scale.linear()
+	                        .domain([0, biggestGray])
+	                        .range(["#E2E8E5", "#626664"]);
+        var legend2 = svg.selectAll(".legend2")
+					 .data(grayScale.ticks(4).reverse())
+					 .enter()
+					 .append("g")
+					 .attr("class", "legend2")
+					 .attr("transform", function (d, i) {
+					     return "translate(0," + i * 30 + ")";
+					 });
+        svg.append("text")
+				.attr("x", gray_legend_text_x)
+				.attr("y", 20)
+				.attr("font-size", 18)
+				.style("text-anchor", "middle")
+				.text("Recommended Cases");
+        legend2.append("text")
+			.attr("x", gray_legend_text_x)
+			.attr("y", gray_legend_text_y) // 20 reserved for text : recommended cases
+			.attr("font-size", 14)
+			.text(function (d) {
+			    if (d == 0) return " " + d + " ~ " + (d + 10);
+			    else return d + " ~ " + (d + 10);
+			});
+        legend2.append("rect")
+		   .attr("x", gray_legend_rect_x)
+		   .attr("y", gray_legend_rect_y)   // 20 reserved for text: recommended cases
+		   .attr("width", 30)
+		   .attr("height", 25)
+		   .style("fill", grayScale)
+		   .style("stroke", "gray");
+
+    }
+    // this function draws diagonal lines in the matrix
+    function drawDiagonalTexts() {
+        for (var i = 0; i < numOfVar; i++) {
+            for (var j = 0; j < numOfVar; j++) {
+                var g =
+				svg.append("rect")
+				   .attr("class", "tile")
+				   .attr("id", "div-" + (numOfVar - j) + "_" + (i + 1))
+				   .attr("x", globalPadding + i * matrixW)
+				   .attr("y", globalPadding + gH - (j + 1) * matrixH)
+				   .attr("width", matrixW)
+				   .attr("height", matrixH)
+                //.style("fill", "#eee8dc")
+				   .style("fill", "#fff")
+				   .style("stroke", "gray")
+				   .style("stroke-width", "1px");
+
+                if ((i + j) == numOfVar - 1) {
+                    svg.append("text")
+				   .attr("x", globalPadding + i * matrixW + matrixW / 3)
+				   .attr("y", globalPadding + gH - (j) * matrixH - matrixH / 2)
+				   .attr("font-family", "Arial Black")
+                   .attr("font-size", "20px")
+				   .text(function () {
+				       return fullName[i];
+				   })
+				   .attr("fill", "black");
+                }
+
+            }
+        }
+
+    }
+    // this function adds legend for the recommended sites
+    function addLegendforsites() {
+        var textForLegend = ["10 or more sites needed",
+                         "5-9 sites needed",
+                         "2-4 sites needed",
+                         "1 site needed",
+                         "well represented",
+                         "1 excess site",
+                         "2-4 excess sites",
+                         "5-9 excess sites",
+                         "10 or more excess sites"];
+
+        var lengendScale = d3.scale.ordinal()
+                               .domain(textForLegend)
+                               .range(["#af0700",
+                                       "#de4c2a",
+                                       "#f88e4f",
+                                       "#fbcd80",
+                                       "#176830",
+                                       "#a5dab0",
+                                       "#4db6c6",
+                                       "#327ebd",
+                                       "#22329a"]);
+        var legend = svg.selectAll(".legend")
+                    .data(lengendScale.domain().slice())
+                    .enter().append("g")
+                    .attr("class", "legend")
+                    .attr("transform", function (d, i) {
+                        return "translate(0," + i * 30 + ")";
+                    });
+        legend.append("text")
+          .attr("x", site_legend_text_x)
+          .attr("y", site_legend_text_y)
+          .attr("dy", "1.3em")
+          .style("text-anchor", "end")
+          .attr("font-size", 14)
+          .text(function (d) { return d; });
+        legend.append("rect")
+          .attr("x", site_legend_rect_x)
+          .attr("y", site_legend_rect_y)
+          .attr("width", 30)
+          .attr("height", 25)
+          .style("fill", lengendScale)
+          .style("stroke", "gray");
+    }
+    // this function adds 2D histograms to the matrix
+    function add2DHistograms() {
+        for (i = 0; i < numOfVar; i++) {
+            for (j = i + 1; j < numOfVar; j++) {
+                histogram('data\/'+names[j] + '_and_' + names[i] + '.json', globalPadding + j * matrixW, globalPadding + i * matrixH, i, j);
+            }
+        } 
+    }
+    // this function adds contour plot to the down corner matrix
+    function addContPlot() {
+        for (i = 0; i < numOfVar; i++) {
+            for (j = i + 1; j < numOfVar; j++) {
+                contPlot(names[i], names[j], 'data\/'+'bvContPlotData.json', globalPadding + i * matrixW + cellPadding, globalPadding + j * matrixH + cellPadding, matrixW - 2 * cellPadding, matrixH - 2 * cellPadding, group, colorSquence);
+            }
+        }
+    }
+    // this function adds scatter plot to the down corner matrix
+    function addScatterPlot() {
+        for (i = 0; i < numOfVar; i++) {
+            for (j = i + 1; j < numOfVar; j++) {
+                scatterPlot(names[i], names[j], 'data\/'+'bvContPlotData.json', globalPadding + i * matrixW + cellPadding, globalPadding + j * matrixH + cellPadding, matrixW - 2 * cellPadding, matrixH - 2 * cellPadding, scatterSvg, ticks, ticks);
+            }
+        }
+    }
+    // this function adds diagonal coordinates
+    function addDiagonalCoor() {
+        for (i = 0; i < ticks.length; i++) {
+            var d1svg = d3.select("#gFront")
+				.append("svg")
+				.attr("x", globalPadding + i * matrixW)
+				.attr("y", globalPadding + i * matrixH)
+				.attr("width", matrixW)
+				.attr("height", matrixH)
+				.style("background-color", "black");
+            var d1xScale = d3.scale.linear()
+                         .domain([d3.min(ticks[i]), d3.max(ticks[i])])
+                         .range([cellPadding, matrixW - cellPadding]);
+            var d1yScale = d3.scale.linear()
+                          .domain([d3.max(ticks[i]), d3.min(ticks[i])])
+                         .range([cellPadding, matrixW - cellPadding]);
+            var d1xAxis = d3.svg.axis()
+                      .scale(d1xScale)
+                      .orient("top")
+                     .tickValues(ticks[i]);
+            //.attr("transform", "rotate(90)");
+            var d1yAxis = d3.svg.axis()
+                      .scale(d1yScale)
+                      .orient("right")
+                      .tickValues(ticks[i]);
+            var d1x2Axis = d3.svg.axis()
+                      .scale(d1xScale)
+                      .orient("bottom")
+                     .tickValues(ticks[i]);
+            var d1y2Axis = d3.svg.axis()
+                      .scale(d1yScale)
+                      .orient("left")
+                     .tickValues(ticks[i]);
+
+            //create X axis
+            d1svg.append("g")
+	   .attr("class", "axis")
+	   .attr("transform", "translate(0," + (matrixH - cellPadding) + ")")
+	   .call(d1xAxis);
+            // create Y Axis
+            d1svg.append("g")
+       .attr("class", "axis")
+       .attr("transform", "translate(" + cellPadding + ",0)")
+       .call(d1yAxis);
+            d1svg.append("g")
+	   .attr("class", "axis")
+	   .attr("transform", "translate(0," + cellPadding + ")")
+	   .call(d1x2Axis);
+            d1svg.append("g")
+       .attr("class", "axis")
+       .attr("transform", "translate(" + (matrixH - cellPadding) + ",0)")
+       .call(d1y2Axis);
+
+        }
+    }
+
+    // this function is called when a user click on the 2D histogram
+    function clickfun(fileName, i, j) {
+        d3.select("#gFront")
+            .attr("opacity", opacity);
+        d3.select("#globalsvgname")
+	       .attr("opacity", opacity);
+        d3.select("#globalsvg")
+	       .attr("opacity", opacity);
+        d3.select("#middlename")
+            .attr("opacity", opacity);
+        d3.json(fileName, function (error, data) {
+
+            popoutSVG = d3.select("#sfront_front")
+                .append("svg")
+            // .attr("transform", "translate(" + (gW / 5) + "," + (gH / 5) + ")")
+                .attr("x", (gW / 5))
+                .attr("y", (gH / 5))
+                .attr("width", gW + 1 * globalPadding)
+                .attr("height", gH + 2 * globalPadding)
+                .attr("opacity", 1)
+                .attr("id", "popout");
+            clickprocess(data, (gW + 1 * globalPadding) / 2, (gH + 2 * globalPadding) / 2);
+
+            popbacksvg = d3.select("#sfront_back")
+                .append("svg")
+            // .attr("transform", "translate(" + (gW / 5) + "," + (gH / 5) + ")")
+                .attr("x", (gW / 5))
+                .attr("y", (gH / 5))
+                .attr("width", gW + 1 * globalPadding)
+                .attr("height", gH + 2 * globalPadding)
+                .attr("opacity", 1)
+                .attr("id", "popbacksvg");
+            popbacksvg.append("rect")
+              .attr("x", (gW + 1 * globalPadding) / 2)
+              .attr("y", 0)
+              .attr("height", (gH + 2 * globalPadding) / 2)
+              .attr("width", (gW + 1 * globalPadding) / 2)
+              .style("stroke", bordercolor)
+              .style("fill", backgroundcolor)
+              .style("stroke-width", border);
+
+
+            var margin = 40;
+            var popX = (gW + 1 * globalPadding) / 2 + margin;
+            var popY = margin;
+            var popWidth = (gW + 1 * globalPadding) / 2;
+            var popHeight = (gH + 2 * globalPadding) / 2;
+
+
+
+            popgroup = d3.select('#sfront_middle')
+            .append("g")
+            .attr("id", "popoutCanvas");
+        
+            contPlot(names[j], names[i], 'data\/'+'bvContPlotData.json', popX, popY, popWidth - 2 * margin, popHeight - 2 * margin, popgroup, colorSquence);
+            scatterPlot(names[j], names[i], 'data\/'+'bvContPlotData.json', popX, popY, popWidth - 2 * margin, popHeight - 2 * margin, popoutSVG, ticks, ticks, 1);
+        });
+    }
+  
+		</script>
+		
+		
+		<script type="text/javascript">
+
+		//global variabes
+			var gW = 1200.0;  // global width
+			var gH = 1200.0;   // global height
+			
+			var globalPadding =0; // padding for legends
+
+			var cellPadding = 5;    // cellPadding for each cell in the matrix
+
+			var fullName = new Array("% Tree cover", "Temperature", "Elevation", "Precipitation");    // fullName displayed in the diagonal lines retrieved from JSON.
+			var names = new Array("pct_tree", "temp_p50", "median_ele", "prec_p50wm");    // names of dimension selected for analsyis
+			var numOfVar = names.length; // ideally this should equal to the length of the array for variables chosen by the user for now hardcoded to be 4
+
+			var biggestGray = 40; // store the biggest global gray recommended value for gray scale legend needed from Matt
+			
+			var popoutSVG;  // global svg for popout window
+			var popgroup;   // global group for popout window in order to draw contour map
+
+			var matrixW = gW / numOfVar;   // matrix width
+			var matrixH = gH / numOfVar;   // matrix Height
+
+			var radius = 7;  //radius variable for circles
+            var opacity = 0.7 // opacity configuration when window poped up
+			var backgroundcolor ="#eee8dc"; // background color for the popup window
+			var bordercolor = "gold";      // bordercolor for the popup window
+			var border = 2;   				// border size for the popup window
+
+			// legend location defined here:
+            var site_legend_text_x = gW + 175;
+            var site_legend_text_y = 200;
+            var site_legend_rect_x = gW + 185;
+            var site_legend_rect_y = 200;
+            // graysale legend location:
+            var gray_legend_text_x = gW+130;
+            var gray_legend_text_y = 60;
+            var gray_legend_rect_x = gW+185;
+            var gray_legend_rect_y = 40;
+
+
+            // following variables are for contour-plot
+            // probability density legend color sequence hard coded could be modified 
+            var colorSquence = ["#fff", "#fdd", "#fbb", "#f99", "#f77", "#f55", "#f33", "#f11"];
+            // this svg is for the scatter plot 
+         
+
+          // the ticks should be retrieved from JSON so request Matt for this input if integrated into GLOBE
+            var ticksforpct_tree = new Array(0, 33, 69, 100);
+            var ticksfortemp_p50 = new Array(-28, 24, 26, 31);
+            var ticksformedian_ele = new Array(-415, 148, 444, 6422);
+            var ticksforprec_p50wm = new Array(1, 1493, 2200, 10572);
+
+            var ticks = new Array;
+            ticks.push(ticksforpct_tree);
+            ticks.push(ticksfortemp_p50);
+            ticks.push(ticksformedian_ele);
+            ticks.push(ticksforprec_p50wm);
+            // middle layer group for countor map
+            var svg = d3.select("#back")
+                .append("svg")
+                .attr("width", gW + 1 * globalPadding + 220) // 220 for legend
+                .attr("height", gH + 2 * globalPadding)
+				.attr("id", "globalsvg")
+			    .style("background-color", "#fff");
+            var group = d3.select('#middle')
+                          .append("g")
+                          .attr("id", "middlename");
+
+            var scatterSvg = d3.select("#front")
+                               .append("svg")
+                               .attr("width", gW + 1 * globalPadding + 220)
+                               .attr("height", gH + 2 * globalPadding)
+		                       .attr("id", "gFront");
+            // ----------------done global variables declaration 
+            addgrayScale();
+            addLegendforsites();
+            drawLegend(gW + 1 * globalPadding + 200 - 15, gH - 400, 30, gH - 250, colorSquence, scatterSvg);
+            drawDiagonalTexts();
+            addDiagonalCoor(); 
+            add2DHistograms();
+            addContPlot();
+            addScatterPlot();
+</script>
+</body>
+</html>
